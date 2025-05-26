@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Aplicação Web com Supabase</title>
+    <link rel="stylesheet" href="index.css">
+    <meta name="description" content="Uma aplicação web de exemplo integrada com Supabase para autenticação.">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8538335583546132"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="auth-container"> <!-- Removido 'hidden' para ser controlado pelo JS/Supabase -->
+        <!-- Formulário de Login -->
+        <div id="login-form-container">
+            <form id="login-form" class="auth-form">
+                <h2>Login</h2>
+                <div id="login-message" class="message-area hidden"></div>
+                <div class="form-group">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" name="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Senha:</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="login-password" name="password" required autocomplete="current-password">
+                        <button type="button" class="password-toggle" aria-label="Mostrar senha" data-target="login-password">👁️</button>
+                    </div>
+                    <p class="auth-switch-extra"><a href="#" id="show-forgot-password">Esqueceu a senha?</a></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Entrar</button>
+                <p class="auth-switch">Não tem uma conta? <a href="#" id="show-register">Cadastre-se</a></p>
+            </form>
+        </div>
+
+        <!-- Formulário de Cadastro -->
+        <div id="register-form-container" class="hidden">
+            <form id="register-form" class="auth-form">
+                <h2>Cadastro</h2>
+                <div id="register-message" class="message-area hidden"></div>
+                <div class="form-group">
+                    <label for="register-name">Nome Completo:</label>
+                    <input type="text" id="register-name" name="name" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" name="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Senha:</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="register-password" name="password" required autocomplete="new-password">
+                        <button type="button" class="password-toggle" aria-label="Mostrar senha" data-target="register-password">👁️</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirmar Senha:</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirm-password" name="confirm-password" required autocomplete="new-password">
+                        <button type="button" class="password-toggle" aria-label="Mostrar senha" data-target="confirm-password">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <p class="auth-switch">Já tem uma conta? <a href="#" id="show-login">Faça login</a></p>
+            </form>
+        </div>
+
+        <!-- Formulário de Recuperação de Senha -->
+        <div id="forgot-password-form-container" class="hidden">
+            <form id="forgot-password-form" class="auth-form">
+                <h2>Recuperar Senha</h2>
+                <div id="forgot-password-message" class="message-area hidden"></div>
+                <div class="form-group">
+                    <label for="forgot-email">Email:</label>
+                    <input type="email" id="forgot-email" name="email" required autocomplete="email" placeholder="Digite seu email de cadastro">
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Link de Recuperação</button>
+                <p class="auth-switch">Lembrou a senha? <a href="#" id="back-to-login-from-forgot">Faça login</a></p>
+            </form>
+        </div>
+
+        <!-- Página/Formulário de Redefinição de Senha -->
+        <div id="reset-password-page-container" class="hidden">
+            <form id="reset-password-page-form" class="auth-form">
+                <h2>Definir Nova Senha</h2>
+                <div id="reset-password-page-message" class="message-area hidden"></div>
+                <div class="form-group">
+                    <label for="new-password">Nova Senha:</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="new-password" name="new-password" required autocomplete="new-password">
+                        <button type="button" class="password-toggle" aria-label="Mostrar senha" data-target="new-password">👁️</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-new-password">Confirmar Nova Senha:</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirm-new-password" name="confirm-new-password" required autocomplete="new-password">
+                        <button type="button" class="password-toggle" aria-label="Mostrar senha" data-target="confirm-new-password">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar Nova Senha</button>
+                <p class="auth-switch"><a href="#" id="back-to-login-from-reset">Voltar para o Login</a></p>
+            </form>
+        </div>
+
+    </div>
+
+    <div id="root" class="hidden">
+        <header>
+            <div class="header-content">
+                <h1>Bem-vindo, <span id="user-name-display">Usuário</span>!</h1>
+                <button id="logout-button" class="btn btn-secondary">Sair</button>
+            </div>
+        </header>
+        <main>
+            <p>Esta é uma aplicação de exemplo integrada com Supabase.</p>
+            <p>O idioma principal desta aplicação é Português do Brasil.</p>
+            <p>Você está logado via Supabase!</p>
+            <button id="watch-ad-button" class="btn btn-success">Assistir Anúncio (Simulado)</button>
+
+            <!-- Google AdSense Block -->
+            <div style="margin-top: 20px; margin-bottom: 20px; text-align: center;">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8538335583546132"
+                     data-ad-slot="3323984520"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <!-- End Google AdSense Block -->
+
+        </main>
+        <footer>
+            <p>&copy; 2024 Minha Aplicação. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Modal de Simulação de Anúncio -->
+    <div id="ad-simulation-modal" class="modal hidden">
+        <div class="modal-content">
+            <button id="close-ad-modal" class="close-button" aria-label="Fechar modal de anúncio">&times;</button>
+            <h3>Simulação de Anúncio</h3>
+            <div id="ad-message" class="message-area"></div>
+            <div id="ad-placeholder" class="hidden">
+                <p>🎬 Imagine um vídeo de anúncio interessante aqui! 🍿</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="index.tsx"></script>
+</body>
+</html><link rel="stylesheet" href="index.css">
+<script src="index.tsx" type="module"></script>

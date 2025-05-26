@@ -1,0 +1,372 @@
+/* Estilos Globais */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center; /* Centraliza #auth-container ou #root */
+}
+
+.hidden {
+    display: none !important;
+}
+
+#auth-container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+   padding-right: 40px; /* Space for the toggle button */
+}
+
+
+.password-toggle {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    bottom: 1px;
+    border: none;
+    background: transparent;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: #333;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 10px; /* Adiciona um pouco de espaço acima dos botões principais */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Cor cinza para botão secundário */
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-success {
+    background-color: #28a745; /* Verde para sucesso/ação positiva */
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+.auth-switch {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.auth-switch a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para o link "Esqueceu a senha?" */
+.auth-switch-extra {
+    font-size: 0.85rem;
+    margin-top: 8px; /* Espaçamento do campo de senha */
+    text-align: right;
+}
+
+.auth-switch-extra a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.auth-switch-extra a:hover {
+    text-decoration: underline;
+}
+
+
+.message-area {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.message-area.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.message-area.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+
+/* Estilos para #root (conteúdo principal) */
+#root {
+    width: 100%;
+    max-width: 960px; /* Define uma largura máxima para o conteúdo principal */
+    background-color: #fff;
+    margin: 20px auto; /* Centraliza se body não usar flex para isso */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    /* flex-grow: 1; // Removido pois body agora centraliza */
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem; /* Padding ajustado para acomodar o header-content */
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header-content h1 {
+    margin: 0;
+    font-size: 1.7rem; /* Ajuste para não ficar muito grande com o botão */
+    text-align: left;
+}
+
+#logout-button {
+    padding: 8px 15px; /* Botão um pouco menor no header */
+    font-size: 0.9rem;
+    margin-top: 0; /* Remove margin-top padrão do .btn */
+}
+
+
+main {
+    padding: 1rem;
+    flex-grow: 1; /* Faz o main crescer para empurrar o footer para baixo */
+}
+
+main p {
+    margin-bottom: 1rem;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+    margin-top: auto; /* Empurra o footer para o final do #root */
+    border-radius: 0 0 8px 8px;
+}
+
+/* Estilos para o Modal de Simulação de Anúncio */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escurecido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#ad-placeholder {
+    background-color: #e9ecef;
+    padding: 30px;
+    margin-top: 15px;
+    border-radius: 6px;
+    border: 1px dashed #ccc;
+}
+
+#ad-placeholder p {
+    margin: 0;
+    font-style: italic;
+    color: #6c757d;
+}
+
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+    .header-content h1 {
+        font-size: 1.3rem;
+    }
+    #logout-button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    #auth-container {
+        margin: 20px;
+        padding: 20px 25px;
+    }
+
+    #root {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-form h2 {
+        font-size: 1.5rem;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        padding: 10px;
+    }
+    .btn {
+        padding: 10px 15px;
+    }
+    .auth-switch-extra {
+        text-align: center; /* Centraliza em telas menores */
+        margin-bottom: 10px;
+    }
+     .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header-content h1 {
+        margin-bottom: 10px; /* Espaço entre título e botão */
+        font-size: 1.4rem;
+    }
+    #logout-button {
+        align-self: flex-start; /* Alinha o botão à esquerda na coluna */
+    }
+}
